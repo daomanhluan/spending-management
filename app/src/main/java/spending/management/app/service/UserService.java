@@ -129,8 +129,8 @@ public class UserService {
 			}
 			else {
 				User userRes = userRepository.findByUsername(user.getUsername());
-				userRes.setPassword(passwordEncoder.encode(user.getUsername()));
-				User userUpdated = userRepository.save(user);
+				userRes.setPassword(passwordEncoder.encode(user.getPassword()));
+				User userUpdated = userRepository.save(userRes);
 				UserDTO userDTO = modelMapper.map(userUpdated, UserDTO.class);
 				result = CreateObject.getResponseMessageDetailSuccess(userDTO);
 			}
@@ -148,13 +148,10 @@ public class UserService {
 			}
 			else {
 				Optional<User> optUser = userRepository.findById(userRoleDTO.getUserId());
-				Optional<Role> optRole =  roleRepository.findById(userRoleDTO.getRoleId());
-				
+				Set<Role> setRole =  roleRepository.findByIdIn(userRoleDTO.getRoleId());
 				
 				User user = optUser.get();
-				Set<Role> roles = user.getRoles();
-				roles.add(optRole.get());
-				user.setRoles(roles);
+				user.setRoles(setRole);
 				userRepository.save(user);
 				UserDTO userDTO = modelMapper.map(optUser.get(), UserDTO.class);
 				result = CreateObject.getResponseMessageDetailSuccess(userDTO);

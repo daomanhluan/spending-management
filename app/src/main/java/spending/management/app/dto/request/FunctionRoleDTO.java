@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserRoleDTO {
+public class FunctionRoleDTO {
 
-	private Long userId;
-	private List<Integer> roleId;
+	private int functionId;
+	private List<Integer> ids;
 }

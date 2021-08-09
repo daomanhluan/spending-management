@@ -48,19 +48,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	
     	 http
          .cors()
          .and()
          .csrf()
          .disable()
          .authorizeRequests()
-         .antMatchers("/api/user/new").permitAll()
+         .antMatchers("/v2/api-docs/**").permitAll()
+         .antMatchers("/swagger.json").permitAll()
+         .antMatchers("/swagger-ui.html").permitAll()
+         .antMatchers("/swagger-resources/**").permitAll()
+         .antMatchers("/webjars/**").permitAll()
+         
          .antMatchers("/api/role").permitAll()
-         .antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+         .antMatchers("/api/login").permitAll() 
+         .antMatchers("/api/user/new").permitAll()
          .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
- // Thêm một lớp Filter kiểm tra jwt
- http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		 // Thêm một lớp Filter kiểm tra jwt
+		 http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
     
     @Bean

@@ -6,6 +6,7 @@ import java.util.List;
 import spending.management.app.dto.response.ResponseMessage;
 import spending.management.app.dto.response.ResponseMessageDetail;
 import spending.management.app.dto.response.UserDTO;
+import spending.management.app.model.Function;
 import spending.management.app.model.Role;
 
 public class CreateObject {
@@ -66,6 +67,36 @@ public class CreateObject {
 		result.setMessage(message);
 		result.setErrorMessage(errorMessage);
 		result.setData(Collections.emptyList());
+		return result;
+	}
+	
+	public static ResponseMessage<Function> responseMessageFunction(List<Function> listFunction) {
+		ResponseMessage<Function> result = new ResponseMessage<>();
+		result.setData(listFunction);
+		return result;
+	}
+	
+	public static ResponseMessage<Function> responseMessageFunction(int errorCode, String message, String errorMessage) {
+		ResponseMessage<Function> result = new ResponseMessage<>();
+		result.setErrorCode(errorCode);
+		result.setMessage(message);
+		result.setErrorMessage(errorMessage);
+		result.setData(Collections.emptyList());
+		return result;
+	}
+	
+	public static ResponseMessageDetail<Function> responseMessageDetailFunctionSuccess(Function function) {
+		ResponseMessageDetail<Function> result = new ResponseMessageDetail<>();
+		result.setData(function);
+		return result;
+	}
+	
+	public static ResponseMessageDetail<Function> responseMessageDetailFunctionError(int errorCode, String message, String errorMessage ) {
+		ResponseMessageDetail<Function> result = new ResponseMessageDetail<>();
+		result.setErrorCode(errorCode);
+//		result.setStatus(status.OK);
+		result.setMessage(message);
+		result.setErrorMessage(errorMessage);
 		return result;
 	}
 }

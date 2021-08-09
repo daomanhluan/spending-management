@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,13 +61,13 @@ public class UserController {
 	    	return new ResponseEntity<ResponseMessageDetail<UserDTO>>(res, res.getStatus());
 	    }
 	    
-	    @PostMapping("/user/change-password")
+	    @PutMapping("/user/change-password")
 	    public ResponseEntity<ResponseMessageDetail<UserDTO>> changePassword(@RequestBody User user){
 	    	ResponseMessageDetail<UserDTO> res = userService.updatePassword(user);
 	    	return new ResponseEntity<ResponseMessageDetail<UserDTO>>(res, res.getStatus());
 	    }
 	    
-	    @PostMapping("/user/change-role")
+	    @PostMapping("/user/update-role")
 	    public ResponseEntity<ResponseMessageDetail<UserDTO>> changeRole(@RequestBody UserRoleDTO userRole){
 	    	ResponseMessageDetail<UserDTO> res = userService.updateRole(userRole);
 	    	return new ResponseEntity<ResponseMessageDetail<UserDTO>>(res, res.getStatus());

@@ -36,20 +36,13 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String username;
-    
-    @Column(nullable = false)
     private String password;
-    
-    @Column(nullable = false)
     private double balance;
-    
-    @Column(name = "avatar")
     private String avatar;
     
     @Column(name = "create_date")
     private Date createDate;
     
-//    cascade = CascadeType.ALL,
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER )
     @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
     @ToString.Exclude // Khoonhg sử dụng trong toString()
@@ -58,5 +51,5 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới (Person)
     )
 //    @Default
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 }
